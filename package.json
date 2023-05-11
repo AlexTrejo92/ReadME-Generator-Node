@@ -1,0 +1,23 @@
+{
+  "name": "static-site",
+  "version": "1.0.0",
+  "description": "A repo created for the 09 challenge from EdX Bootcamp. ReadMe Generator using node and JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexTrejo92/ReadME-Generator-Node.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/AlexTrejo92/ReadME-Generator-Node/issues"
+  },
+  "homepage": "https://github.com/AlexTrejo92/ReadME-Generator-Node#readme"
+}
