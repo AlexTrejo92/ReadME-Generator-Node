@@ -59,13 +59,16 @@ const questions = [
 ];
 
 
-// TODO: Create a function to write README file
+// TODO: Create a function to write README file. DONE. Missing to add an IF statement for the license badge
 function writeToFile(response) {
     let fileName = 'READMEFile.md';
 const readMeContent = 
 `# ${response.projectname}
 
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
+[![License: CC0-1.0](https://licensebuttons.net/l/zero/1.0/80x15.png)](http://creativecommons.org/publicdomain/zero/1.0/)
 
 ## Description
     
@@ -73,12 +76,12 @@ ${response.description}
 
 ## Table of contents
 
-* [Installation] (#installation)
-* [Usage] (#usage)
-- [License] (#license)
-- [Contributing] (#contributing)
-- [Tests] (#tests)
-- [Questions] (#questions)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
 
 ## Installation
 To install necessary dependencies, run the following command:
@@ -108,7 +111,6 @@ fs.writeFile(fileName, readMeContent, (err) => err ? console.log(err) : console.
 function init() {
     
 inquirer.prompt(questions).then((response) => {
-    console.log(response);    
         writeToFile(response);
 });
 }
