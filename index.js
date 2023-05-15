@@ -32,11 +32,24 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'icommand',
+        name: 'installcommand',
         message: 'What command should be run to install dependencies?',
         default() {
             return 'npm i';
         },
+    },
+    {
+        type: 'input',
+        name: 'testcommand',
+        message: 'What command should be run to run tests?',
+        default() {
+            return 'npm test';
+        },
+    },
+    {
+        type: 'input',
+        message: 'What does the user need to know about using the repo?',
+        name: 'usage',
     },
     {
         type: 'input',
@@ -45,52 +58,60 @@ const questions = [
     }
 ];
 
-inquirer.prompt(questions).then((response) => {
-    console.log('first test correct!');
-    console.log(response);
-    console.log(response.projectname);
-    const fileName = 'ReadMeFile.md'
-    fs.writeFile(fileName, JSON.stringify(generateReadMe), (err) => err ? console.log(err) : console.log('Successfully created readme for your project!'));
-    writeToFile(response);
-});
 
 // TODO: Create a function to write README file
 function writeToFile(response) {
-    console.log(response)
-    let fileName = 'READMEFile.md'
+    let fileName = 'READMEFile.md';
+const readMeContent = 
+`# ${response.projectname}
 
-    // const generateReadMe = ({ projectname, description, license, username, email, icommand, contributing }) => 
-    const generateReadMe = (response) => 
-    `# ${response.projectname}
+
+
+## Description
     
-    ## Description
+${response.description}
 
-    ${description}
+## Table of contents
+
+* [Installation] (#installation)
+* [Usage] (#usage)
+- [License] (#license)
+- [Contributing] (#contributing)
+- [Tests] (#tests)
+- [Questions] (#questions)
+
+## Installation
+To install necessary dependencies, run the following command:
+${response.installcommand}
+
+## Usage
+${response.usage}
+
+## License
+This project is licensed under the ${response.license} license.
+
+## Contributing
+${response.contributing}
+
+## Tests
+To run tests, run the following command:
+${response.testcommand}
+
+## Questions
+If you have any questions about the repo, open an issue or contact me directly at ${response.email}. You can find more of my work at [${response.username}](https://github.com/${response.username}).
+
+`;
+// fs.writeFile(fileName, JSON.stringify(readMeContent, null, '\n'), (err) => err ? console.log(err) : console.log('Successfully created readme for your project!'));
+fs.writeFile(fileName, readMeContent, (err) => err ? console.log(err) : console.log('Successfully created readme for your project!'));
+}
+// TODO: Create a function to initialize app
+function init() {
     
-    ## Table of contents
-
-    - [Installation] (#installation)
-    - [Usage] (#usage)
-    - [License] (#license)
-    - [Contributing] (#installation)
-    - [Installation] (#installation)
-    - [Installation] (#installation)
-
-    ## Installation
-
-    To install necessary dependencies, run the following command:
-
-    ${icommand}
-
-
-    `;
-
-
-
+inquirer.prompt(questions).then((response) => {
+    console.log(response);    
+        writeToFile(response);
+});
 }
 
-// TODO: Create a function to initialize app
-// function init() {}
-
 // Function call to initialize app
-// init();
+init();
