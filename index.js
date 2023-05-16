@@ -1,4 +1,4 @@
-// TODO: Include packages needed for this application. DONE
+// This code includes packages needed for this application.
 const fs = require('fs');
 const inquirer = require('inquirer');
 
@@ -28,7 +28,7 @@ const questions = [
         type: 'list',
         message: 'What kind of license should your project have?',
         name: 'license',
-        choices: ['MIT' , 'Apache 2.0', 'BSD 2', 'CC Zero'],
+        choices: ['MIT' , 'Apache_2.0', 'BSD_2', 'CC_Zero', 'None'],
     },
     {
         type: 'input',
@@ -59,19 +59,17 @@ const questions = [
 ];
 
 
-// TODO: Create a function to write README file. DONE. Missing to add an IF statement for the license badge
+// This function creates the readme file using fs with the input the user wrote using inquirer.
 function writeToFile(response) {
-    let fileName = 'READMEFile.md';
+    let fileName = './DEST/READMEFile.md';
 const readMeContent = 
 `# ${response.projectname}
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
-[![License: CC0-1.0](https://licensebuttons.net/l/zero/1.0/80x15.png)](http://creativecommons.org/publicdomain/zero/1.0/)
+${renderLicense(response.license)}
+
 
 ## Description
-    
+
 ${response.description}
 
 ## Table of contents
@@ -85,35 +83,57 @@ ${response.description}
 
 ## Installation
 To install necessary dependencies, run the following command:
+\`\`\`
 ${response.installcommand}
+\`\`\`
 
 ## Usage
 ${response.usage}
 
-## License
-This project is licensed under the ${response.license} license.
+${showLicenseSection(response.license)}
 
 ## Contributing
 ${response.contributing}
 
 ## Tests
 To run tests, run the following command:
+\`\`\`
 ${response.testcommand}
+\`\`\`
 
 ## Questions
 If you have any questions about the repo, open an issue or contact me directly at ${response.email}. You can find more of my work at [${response.username}](https://github.com/${response.username}).
 
 `;
-// fs.writeFile(fileName, JSON.stringify(readMeContent, null, '\n'), (err) => err ? console.log(err) : console.log('Successfully created readme for your project!'));
+
 fs.writeFile(fileName, readMeContent, (err) => err ? console.log(err) : console.log('Successfully created readme for your project!'));
 }
-// TODO: Create a function to initialize app
+// Function to initialize app
 function init() {
     
 inquirer.prompt(questions).then((response) => {
         writeToFile(response);
 });
 }
+
+// This function checks if the user chose a license an prints a badge with the name of that license.
+function renderLicense (license) {
+    if (license == 'None') {
+        return ''
+    } else {
+        return `![GitHub license](https://img.shields.io/badge/license-${license}-blue.svg)`
+    }
+}
+// This function was created to show or hide the License section of the readme, depending if the user chose or not a license for their project.
+function showLicenseSection (license) {
+    if (license == 'None') {
+        return ''
+    } else {
+return `## License
+This project is licensed under the ${license} license.`
+
+    }
+    }
 
 // Function call to initialize app
 init();
