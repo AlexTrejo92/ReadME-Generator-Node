@@ -8,7 +8,7 @@ This is a CLI application that generates a professional README.md file according
 
 ## Link
 
-Follow this URL to access a walkthrough video on how to use this application: https://
+Follow this URL to access a walkthrough video on how to use this application: https://drive.google.com/file/d/1ajn15NZ2ORYnR_qdl41Mm0O7kFUf_DDg/view?usp=share_link
 
 ## Installation
 
